@@ -14,6 +14,7 @@ pipeline {
         sh 'ls -l'
         sh 'pwd'
         sh 'cd app'
+        sh 'ls -l'
         sh 'terraform plan -var-file=test.tfvars -var app_version=v1 -no-color'
       }
     }
