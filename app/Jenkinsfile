@@ -1,0 +1,28 @@
+pipeline {
+  agent any
+  options {
+    skipDefaultCheckout(true)
+  }
+  stages{
+    stage('clean workspace') {
+      steps {
+        cleanWs()
+      }
+    }
+    stage('checkout') {
+      steps {
+        checkout scm
+      }
+    }
+    stage('terraform') {
+      steps {
+        sh 'terraformw plan -var-file=test.tfvars -var app_version=v1 -no-color'
+      }
+    }
+  }
+  post {
+    always {
+      cleanWs()
+    }
+  }
+}
