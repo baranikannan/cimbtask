@@ -1,21 +1,19 @@
+
 pipeline {
-  agent any
-  options {
-    skipDefaultCheckout(true)
-  }
-  stages{
-    stage('checkout') {
-      steps {
-        checkout scm
-      }
+    agent any
+    stages {
+        stage('hello AWS') {
+            steps {
+                withAWS(credentials: 'baranikannan', region: 'ap-southeast-1') {
+                    sh '''
+                    aws s3 ls
+                    cd app
+                    terraform init
+                    terraform workspace list
+                    echo ${app_version}
+                    '''
+                }
+            }
+        }
     }
-    stage('terraform') {
-      steps {
-        sh 'ls -l'
-        sh 'pwd'
-        sh 'cd app && terraform init && terraform plan -var-file=test.tfvars -var app_version=v1 -no-color'
-        
-      }
-    }
-  }
 }
