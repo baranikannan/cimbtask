@@ -11,7 +11,7 @@ pipeline {
     }
     stage('terraform') {
       steps {
-        sh 'terraformw plan -var-file=test.tfvars -var app_version=v1 -no-color'
+        sh 'terraform plan -var-file=test.tfvars -var app_version=v1 -no-color'
       }
     }
   }
