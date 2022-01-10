@@ -4,13 +4,15 @@ pipeline {
     skipDefaultCheckout(true)
   }
   stages{
-
+    stage('checkout') {
+      steps {
+        checkout scm
+      }
+    }
     stage('terraform') {
       steps {
         sh 'terraformw plan -var-file=test.tfvars -var app_version=v1 -no-color'
       }
-    }
-  }
     }
   }
 }
