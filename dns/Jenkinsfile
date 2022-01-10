@@ -6,7 +6,7 @@ pipeline {
                 withAWS(credentials: 'baranikannan', region: 'ap-southeast-1') {
                     sh '''
                     aws s3 ls
-                    cd app
+                    cd dns
                     sh ./point_dns.sh ${app_version}
                     echo ${app_version}
                     '''
