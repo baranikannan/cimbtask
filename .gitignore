@@ -1,0 +1,3 @@
+newvpc/.terraform*
+app/.terraform*
+dns/.terraform*
