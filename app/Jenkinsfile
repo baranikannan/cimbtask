@@ -2,6 +2,10 @@
 pipeline {
     agent any
     stages {
+        stage('checkout') {
+        steps {
+            checkout scm
+        }        
         stage('hello AWS') {
             steps {
                 withAWS(credentials: 'baranikannan', region: 'ap-southeast-1') {
